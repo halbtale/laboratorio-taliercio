@@ -15,15 +15,28 @@ public class Fib {
 		}
 		if (n<2) throw new IllegalArgumentException();
 		
+		System.out.println("Iterative fib: "+iterativeFib(n));
+		System.out.println("Recursive fib: "+recursiveFib(n));
 		
 	}
 	
-	public static int recursiveFib(int n) {
+	public static long recursiveFib(int n) {
 		if (n == 0 || n == 1) return 1;
 		return recursiveFib(n-2) + recursiveFib(n-1);
 	}
 	
-	public static int iterativeFib(int n) {
-		return 0;
+	public static long iterativeFib(int n) {
+		long a = 0;
+		long b = 1;
+
+		for (int i = 0; i<n; i++) {
+			long newB = a + b;
+			long newA = b;
+			a = newA;
+			b = newB;
+		}
+
+
+		return b;
 	}
 }
