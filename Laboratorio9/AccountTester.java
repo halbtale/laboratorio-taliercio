@@ -2,16 +2,19 @@ public class AccountTester
 {
     public static void main(String[] args)
     { 
-        // test metodi di BankAccount
+        // // test metodi di BankAccount
         BankAccount a = new BankAccount();
-        testAccount(a);
+        // testAccount(a);
 
-        // test metodi di SavingsAccount
-        a = new SavingsAccount(.5);
-        testAccount(a);
+        // // test metodi di SavingsAccount
+        // a = new SavingsAccount(.5);
+        // testAccount(a);
 
-        // test metodi di CheckingAccount
-        a = new CheckingAccount();
+        // // test metodi di CheckingAccount
+        // a = new CheckingAccount();
+        // testAccount(a);
+
+        a = new TimeDepositAccount(.5, 2);
         testAccount(a);
     }
     
@@ -35,7 +38,12 @@ public class AccountTester
         BankAccount newa = null; 
 
         //Le seguenti operazioni possono essere eseguite solo se l'oggetto e` 
-        if (a instanceof SavingsAccount)  //... di tipo SavingsAccount
+        if (a instanceof TimeDepositAccount) {
+            TimeDepositAccount ta = (TimeDepositAccount) a;
+            ta.addInterest();
+            System.out.println("Interessi fine mese:\n     " + a);
+            newa = new TimeDepositAccount(ta.getBalance(), ta.getInterestRate(), ta.getLimitedMonthsLeft());
+        } else if (a instanceof SavingsAccount)  //... di tipo SavingsAccount
         {   SavingsAccount sa = (SavingsAccount) a;
             sa.addInterest();
             System.out.println("Interessi fine mese:\n     " + a);
