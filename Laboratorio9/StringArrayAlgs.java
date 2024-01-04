@@ -1,12 +1,6 @@
 import java.util.Arrays;
 
 public class StringArrayAlgs {
-    public static void main(String[] args) {
-        String[] elements = {"puttana", "troia", "vacca", "porca", "sofia", "bengalese", "zoccola"};
-        iterativeMergeSort(elements, elements.length);
-        System.out.println(Arrays.toString(elements));
-    }
-
     public static void iterativeMergeSort(String[] array, int arraySize) {
         for (int tempArraySize = 2; tempArraySize<=arraySize; tempArraySize = tempArraySize < arraySize ? tempArraySize * 2 <= arraySize ? tempArraySize * 2 : arraySize : tempArraySize * 2) {
             int numberOfBlocks = arraySize / tempArraySize;
@@ -81,5 +75,17 @@ public class StringArrayAlgs {
             }
         }
         return -1;
+    }
+
+    public static String[] resize(String[] array, int newLength) {
+        String[] newArray = new String[newLength];
+
+        System.arraycopy(array, 0, newArray, 0, Math.min(newLength, array.length));
+
+        return newArray;
+    }
+
+    public static String printArray(String[] array, int arraySize) {
+        return Arrays.toString(array);
     }
 }
