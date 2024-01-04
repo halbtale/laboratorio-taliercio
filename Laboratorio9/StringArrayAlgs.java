@@ -2,13 +2,56 @@ import java.util.Arrays;
 
 public class StringArrayAlgs {
     public static void main(String[] args) {
-        String[] elements = {"puttana", "troia", "vacca", "porca", "sofia"};
-        bubbleSort(elements, elements.length);
+        String[] elements = {"puttana", "troia", "vacca", "porca", "sofia", "bengalese", "zoccola"};
+        iterativeMergeSort(elements, elements.length);
         System.out.println(Arrays.toString(elements));
     }
 
     public static void iterativeMergeSort(String[] array, int arraySize) {
-        // todo
+        for (int tempArraySize = 2; tempArraySize<=arraySize; tempArraySize = tempArraySize < arraySize ? tempArraySize * 2 <= arraySize ? tempArraySize * 2 : arraySize : tempArraySize * 2) {
+            int numberOfBlocks = arraySize / tempArraySize;
+            if (arraySize % tempArraySize != 0) numberOfBlocks++;
+            for (int i = 0; i<numberOfBlocks; i++) {
+                int startIndex = i*tempArraySize;
+                int endIndex = startIndex + tempArraySize;
+                if (endIndex > arraySize) endIndex = arraySize;
+                int midIndex = (startIndex + endIndex) / 2;
+                if ((startIndex + endIndex) % 2 != 0) midIndex++;
+
+                String[] tempOrderedArray = new String[endIndex - startIndex];
+                String[] array1 = new String[midIndex - startIndex];
+                String[] array2 = new String[endIndex - midIndex];
+
+                System.arraycopy(array, startIndex, array1, 0, array1.length);
+                System.arraycopy(array, midIndex, array2, 0, array2.length);
+
+                merge(tempOrderedArray, array1, array2);
+
+                System.arraycopy(tempOrderedArray, 0, array, startIndex, tempOrderedArray.length);
+
+               // System.out.printf("[Debug] Ordered array from %d to %d with mid in %d and size of %d%n", startIndex, endIndex, midIndex, tempArraySize);
+            }
+        }
+    }
+
+    private static void merge(String mainArray[], String array1[], String[] array2) {
+        int i = 0, i1 = 0, i2 = 0;
+
+        while (i1 < array1.length && i2 < array2.length) {
+            if (array1[i1].compareTo(array2[i2]) < 0) {
+                mainArray[i++] = array1[i1++];
+            } else {
+                mainArray[i++] = array2[i2++];
+            }
+        }
+
+        while (i1 < array1.length) {
+            mainArray[i++] = array1[i1++];
+        }
+
+        while (i2 < array2.length) {
+            mainArray[i++] = array2[i2++];
+        }
     }
 
     public static void bubbleSort(String[] array, int arraySize) {
