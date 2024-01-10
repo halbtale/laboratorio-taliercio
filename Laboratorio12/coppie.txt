@@ -1,0 +1,12 @@
+6 sei
+10 undici
+10 dieci
+4 quattro
+1 uno
+2 due
+7 settanta
+5 cinque
+9 nove
+3 tre
+8 otto
+7 sette
